@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Custody Calendar</title>
+    <style>
+        /* We'll add CSS here */
+    </style>
+</head>
+<body>
+    <h1>Custody Calendar</h1>
+    <div id="calendar"></div>
+
+    <script>
+        // We'll add JavaScript here
+    </script>
+</body>
+</html>
+
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 20px;
+    }
+    #calendar {
+        display: grid;
+        grid-template-columns: repeat(7, 1fr);
+        gap: 5px;
+    }
+    .day {
+        border: 1px solid #ccc;
+        padding: 10px;
+        text-align: center;
+    }
+    .your-day {
+        background-color: #e6f3ff;
+    }
+    .other-day {
+        background-color: #fff0f0;
+    }
+</style>
+
+<script>
+    function generateCalendar() {
+        const calendar = document.getElementById('calendar');
+        const currentDate = new Date();
+        const daysInMonth = new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, 0).getDate();
+
+        for (let i = 1; i <= daysInMonth; i++) {
+            const day = document.createElement('div');
+            day.classList.add('day');
+            day.textContent = i;
+
+            const date = new Date(currentDate.getFullYear(), currentDate.getMonth(), i);
+            
+            if (date < new Date(2024, 7, 26)) { // Before August 26
+                if (date.getDay() === 2 || date.getDay() === 4) { // Tuesday or Thursday
+                    day.classList.add('your-day');
+                    day.textContent += ' - You';
+                } else {
+                    day.classList.add('other-day');
+                    day.textContent += ' - Other';
+                }
+            } else { // After August 26
+                // You'll need to define the new schedule here
+                day.textContent += ' - TBD';
+            }
+
+            calendar.appendChild(day);
+        }
+    }
+
+    generateCalendar();
+</script>
